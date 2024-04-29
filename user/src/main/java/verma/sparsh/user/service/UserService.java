@@ -8,4 +8,6 @@ public interface UserService {
     public Users findUserById(Integer id);
 
     public Users createUser(UserDto user);
+
+    public Users updateAccountStatus(Integer userId, Double userAmount);
 }

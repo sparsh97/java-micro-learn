@@ -15,10 +15,13 @@ import lombok.NoArgsConstructor;
 public class Users {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
     private String email;
     private Double amount;
     private String paymentType;
+    private String paymentMethod;
+    private String srcAccount;
+    private Double availableAmount;
 }

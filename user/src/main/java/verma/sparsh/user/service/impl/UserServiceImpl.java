@@ -32,4 +32,11 @@ public class UserServiceImpl implements UserService {
     public Users createUser(UserDto user) {
         return userRepository.save(userMapper.userDtoToUsers(user));
     }
+
+    @Override
+    public Users updateAccountStatus(Integer userId, Double userAmount) {
+        Users userDetails = findUserById(userId);
+        userDetails.setAmount(userAmount);
+        return userRepository.save(userDetails);
+    }
 }

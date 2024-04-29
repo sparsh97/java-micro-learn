@@ -31,22 +31,11 @@
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
-        <!--		<dependency>-->
-        <!--			<groupId>org.openapitools</groupId>-->
-        <!--			<artifactId>jackson-databind-nullable</artifactId>-->
-        <!--			<version>0.2.1</version>-->
-        <!--		</dependency>-->
-        <!--		<dependency>-->
-        <!--			<groupId>org.springdoc</groupId>-->
-        <!--			<artifactId>springdoc-openapi-ui</artifactId>-->
-        <!--			<version>1.7.0</version>-->
-        <!--		</dependency>-->
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <scope>runtime</scope>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.mapstruct/mapstruct -->
         <dependency>
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct</artifactId>
