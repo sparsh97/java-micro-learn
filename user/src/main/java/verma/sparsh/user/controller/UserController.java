@@ -29,8 +29,8 @@ public class UserController {
         return ResponseEntity.ok(users);
     }
 
-    @PostMapping(params = "/update/amount")
-    public ResponseEntity<Users> updateUserAmount(@RequestBody UserDto userDto) {
-        return ResponseEntity.ok(userService.updateAccountStatus(userDto.getId(), userDto.getAmount()));
+    @PutMapping(path = "/update/amount/{userId}/{amount}")
+    public ResponseEntity<Users> updateUserAmount(@PathVariable("userId") Integer userId, @PathVariable("amount") Double amount) {
+        return ResponseEntity.ok(userService.updateAccountStatus(userId, amount));
     }
 }

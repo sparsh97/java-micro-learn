@@ -36,7 +36,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public Users updateAccountStatus(Integer userId, Double userAmount) {
         Users userDetails = findUserById(userId);
-        userDetails.setAmount(userAmount);
+        userDetails.setAmount(userDetails.getAmount() - userAmount);
         return userRepository.save(userDetails);
     }
 }
