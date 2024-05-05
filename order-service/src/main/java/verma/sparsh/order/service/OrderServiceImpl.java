@@ -22,6 +22,8 @@ import java.util.UUID;
 @Slf4j
 public class OrderServiceImpl implements OrderService{
 
+    public static final String PAYMENTS = "http://localhost:9292/payments/";
+    public static final String USER = "http://localhost:8080/user/";
     private final OrderRepositoy orderRepositoy;
 
     @Autowired
@@ -60,8 +62,8 @@ public class OrderServiceImpl implements OrderService{
     public OrderResponseDto getOrder(String orderId) {
         try {
             Order order = orderRepositoy.findByOrderId(orderId);
-            PaymentDTO paymentDTO = restTemplate.getForObject("http://localhost:9292/payments/" + orderId, PaymentDTO.class);
-            UserDTO userDTO = restTemplate.getForObject("http://localhost:8080/user/" + order.getUserId(), UserDTO.class);
+            PaymentDTO paymentDTO = restTemplate.getForObject(PAYMENTS + orderId, PaymentDTO.class);
+            UserDTO userDTO = restTemplate.getForObject(USER + order.getUserId(), UserDTO.class);
             return OrderResponseDto.builder()
                     .paymentDTO(paymentDTO)
                     .userDTO(userDTO)
