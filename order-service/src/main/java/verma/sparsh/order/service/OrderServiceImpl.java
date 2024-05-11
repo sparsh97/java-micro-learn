@@ -22,8 +22,8 @@ import java.util.UUID;
 @Slf4j
 public class OrderServiceImpl implements OrderService{
 
-    public static final String PAYMENTS = "http://localhost:9292/payments/";
-    public static final String USER = "http://localhost:8080/user/";
+    public static final String PAYMENTS = "http://PAYMENT-SERIVCE/payments/";
+    public static final String USER = "http://USER-SERVICE/user/";
     private final OrderRepositoy orderRepositoy;
 
     @Autowired
