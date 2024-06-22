@@ -1,2 +1,5 @@
-# java-micro-learn
-Spring Microservice Learn
+
+# Learning Microservice with Spring Boot and Java
+
+This is a simple microservice project.
+
