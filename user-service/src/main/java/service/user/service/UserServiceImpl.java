@@ -1,8 +1,11 @@
 package service.user.service;
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+import service.user.dto.OrderDTO;
 import service.user.dto.UserDTO;
 import service.user.entity.Users;
 import service.user.mapper.UserMapper;
@@ -20,6 +23,9 @@ public class UserServiceImpl implements UserService{
 
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private RestTemplate restTemplate;
 
     @Override
     public UserDTO saveUser(UserDTO userDTO) {
@@ -55,5 +61,16 @@ public class UserServiceImpl implements UserService{
     public List<UserDTO> getAllUsers() {
         log.info("Getting all users");
         return userMapper.usersToUserDTOs(userRepository.findAll());
+    }
+
+    @Override
+    public List<OrderDTO> getAllOrdersByUserId(String userId) {
+        try {
+            List<OrderDTO> orderDTOS = restTemplate.getForObject("http://ORDER-SERVICE/order/getOrdersByCustomerId/" + userId, List.class);
+            return orderDTOS;
+        } catch (Exception e){
+            log.error("Error while getting orders for user: {}", ExceptionUtils.getStackTrace(e));
+            throw new RuntimeException("Error while getting orders for user: " + userId);
+        }
     }
 }

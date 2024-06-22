@@ -1,6 +1,7 @@
 package service.user.service;
 
 import org.springframework.stereotype.Service;
+import service.user.dto.OrderDTO;
 import service.user.dto.UserDTO;
 
 import java.util.List;
@@ -13,4 +14,5 @@ public interface UserService {
     UserDTO updateUser(UserDTO userDTO);
     void deleteUser(String userId);
     List<UserDTO> getAllUsers();
+    List<OrderDTO> getAllOrdersByUserId(String userId);
 }

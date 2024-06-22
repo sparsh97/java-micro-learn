@@ -11,6 +11,20 @@ spring:
           uri: lb://USER-SERVICE
           predicates:
             - Path=/user/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: userCircuit
+                fallbackUri: forward:/fallback/user
+        - id: ORDER-SERVICE
+          uri: lb://ORDER-SERVICE
+          predicates:
+            - Path=/order/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: orderCircuit
+                fallbackUri: forward:/fallback/user
     discovery:
       locator:
         enabled: true
@@ -23,23 +37,3 @@ eureka:
   instance:
     preferIpAddress: true
 
-
-#eureka:
-#  instance:
-#    hostname: localhost
-#  client:
-#    service-url:
-#      defaultZone: http://localhost:8761/eureka/
-#
-#spring:
-#  cloud:
-#    gateway:
-#      discovery:
-#        locator:
-#          enabled: true
-#          lower-case-service-id: true
-#      routes:
-#        - id: USER-SERVICE
-#          uri: http://localhost:9002/
-#          predicates:
-#            - Path=/user/**

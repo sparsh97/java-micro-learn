@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import service.user.dto.OrderDTO;
 import service.user.dto.UserDTO;
 import service.user.service.UserService;
 
@@ -46,6 +47,11 @@ public class UserController {
     @GetMapping("/get-all-users")
     public ResponseEntity<List<UserDTO>> getAllUsers() {
         return ResponseEntity.ok(userService.getAllUsers());
+    }
+
+    @GetMapping("/getOrdersByUserId/{userId}")
+    public ResponseEntity<List<OrderDTO>> getOrdersByUserId(@PathVariable("userId") String userId) {
+        return ResponseEntity.ok(userService.getAllOrdersByUserId(userId));
     }
 }
 
