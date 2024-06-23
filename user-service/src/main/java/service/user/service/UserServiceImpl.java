@@ -1,5 +1,6 @@
 package service.user.service;
 
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,6 +65,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    @CircuitBreaker(name = "orderService", fallbackMethod = "getCachedOrdersByUserId")
     public List<OrderDTO> getAllOrdersByUserId(String userId) {
         try {
             List<OrderDTO> orderDTOS = restTemplate.getForObject("http://ORDER-SERVICE/order/getOrdersByCustomerId/" + userId, List.class);
@@ -72,5 +74,10 @@ public class UserServiceImpl implements UserService{
             log.error("Error while getting orders for user: {}", ExceptionUtils.getStackTrace(e));
             throw new RuntimeException("Error while getting orders for user: " + userId);
         }
+    }
+
+    public List<OrderDTO> getCachedOrdersByUserId(String userId, Throwable throwable) {
+        log.error("Error while getting orders for user: {}", userId);
+        return List.of(OrderDTO.builder().build());
     }
 }
