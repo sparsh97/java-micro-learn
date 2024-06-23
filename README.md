@@ -26,7 +26,7 @@ Change the project branch
 Start the server
 ```
  1. First Run the service-registry module.
- 2. Run the api-gateway module.
+ 2. Run the config-server first then api-gateway module.
  3. Then run any other services.
 ```
 
